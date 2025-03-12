@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('copyBtn');
     const allowEmoji = document.getElementById('allowEmoji');
     const allowChars = document.getElementById('allowChars');
-    const allowFile = document.getElementById('allowFile');
+    const loadInputFile = document.getElementById('loadInputFile');
     const interactiveMode = document.getElementById('interactiveMode');
     const verboseMode = document.getElementById('verboseMode');
     const interactivePrompt = document.getElementById('interactivePrompt');
@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const closePromptBtn = document.getElementById('closePromptBtn');
     
     // State variables
-    let fileContent = '';
     let currentCharacterDecision = null;
     let characterDecisionResolve = null;
     
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     detectBtn.addEventListener('click', detectOnly);
     sanitizeBtn.addEventListener('click', sanitizeTextHandler);
     copyBtn.addEventListener('click', copyToClipboard);
-    allowFile.addEventListener('change', handleFileUpload);
+    loadInputFile.addEventListener('change', handleInputFileUpload);
     keepBtn.addEventListener('click', () => resolveCharacterDecision('keep'));
     removeBtn.addEventListener('click', () => resolveCharacterDecision('remove'));
     replaceBtn.addEventListener('click', showReplacementInput);
@@ -67,9 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         const allowedCharacters = getAllowedCharacters({
-            allowEmoji: allowEmoji.checked,
-            allowChars: allowChars.value,
-            allowFileContent: fileContent
+            allowEmoji: allowEmoji.checked
+            // allowChars element no longer exists
         });
         
         const detected = detectSuspiciousCharacters(text, allowedCharacters);
@@ -87,9 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         const allowedCharacters = getAllowedCharacters({
-            allowEmoji: allowEmoji.checked,
-            allowChars: allowChars.value,
-            allowFileContent: fileContent
+            allowEmoji: allowEmoji.checked
+            // allowChars element no longer exists
         });
         
         if (verboseMode.checked) {
@@ -134,23 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    /**
-     * Handle file upload for allowed characters
-     */
-    function handleFileUpload(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            fileContent = e.target.result;
-            showToast(`File loaded: ${file.name}`, 'success');
-        };
-        reader.onerror = function() {
-            showToast('Error reading file.', 'error');
-        };
-        reader.readAsText(file);
-    }
+
     
     /**
      * Display detected suspicious characters
@@ -257,4 +238,39 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => toast.remove(), 300);
         }, 3000);
     }
+    
+    /**
+     * Handle file upload for input text
+     * Loads the file content directly into the input text area without converting to plain text
+     */
+    function handleInputFileUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Get the array buffer
+            const arrayBuffer = e.target.result;
+            
+            // Convert to a Uint8Array to work with binary data
+            const uint8Array = new Uint8Array(arrayBuffer);
+            
+            // Convert to a string preserving all bytes
+            let binaryString = '';
+            for (let i = 0; i < uint8Array.length; i++) {
+                binaryString += String.fromCharCode(uint8Array[i]);
+            }
+            
+            // Set the binary string directly to the input text area
+            inputText.value = binaryString;
+            showToast(`File loaded: ${file.name}`, 'success');
+        };
+        reader.onerror = function() {
+            showToast('Error reading file.', 'error');
+        };
+        
+        // Read as array buffer to preserve binary data
+        reader.readAsArrayBuffer(file);
+    }
+    
 });

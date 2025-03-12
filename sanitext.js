@@ -8,16 +8,14 @@
  * - default ASCII printable
  * - user-specified flag to allow single code point emojis
  * - user-specified chars
- * - user-specified file
  * 
  * @param {Object} options - Configuration options
  * @param {boolean} options.allowEmoji - Whether to allow emoji characters
  * @param {string} options.allowChars - Additional characters to allow
- * @param {string} options.allowFileContent - Content from a file containing allowed characters
  * @returns {Set} - Set of allowed characters
  */
 function getAllowedCharacters(options = {}) {
-    const { allowEmoji = false, allowChars = '', allowFileContent = '' } = options;
+    const { allowEmoji = false, allowChars = '' } = options;
     
     // Create a set with ASCII printable characters (32-126)
     const allowed = new Set();
@@ -38,11 +36,6 @@ function getAllowedCharacters(options = {}) {
     // Add user-specified characters
     if (allowChars) {
         [...allowChars].forEach(char => allowed.add(char));
-    }
-    
-    // Add characters from file content
-    if (allowFileContent) {
-        [...allowFileContent].forEach(char => allowed.add(char));
     }
     
     return allowed;
