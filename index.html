@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaniText - Text Sanitization Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <h1><a href="index.html" style="text-decoration: none; color: inherit;">SaniText</a></h1>
+            <p>A browser-based text sanitization tool</p>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <h2>Input Text</h2>
+                <textarea id="inputText" placeholder="Enter or paste text to sanitize..."></textarea>
+                <div class="button-group">
+                    <button id="pasteBtn">Paste from Clipboard</button>
+                    <button id="detectBtn">Detect Only</button>
+                    <button id="sanitizeBtn">Sanitize Text</button>
+                </div>
+            </div>
+            
+            <div class="options-section">
+                <h2>Options</h2>
+                <div class="option">
+                    <input type="checkbox" id="allowEmoji">
+                    <label for="allowEmoji">Allow Emoji</label>
+                </div>
+                <div class="option">
+                    <label for="allowChars">Additional allowed characters:</label>
+                    <input type="text" id="allowChars" placeholder="e.g., αñøç">
+                </div>
+                <div class="option">
+                </div>
+                <div class="option">
+                    <input type="checkbox" id="interactiveMode">
+                    <label for="interactiveMode">Interactive Mode</label>
+                </div>
+                <div class="option">
+                    <input type="checkbox" id="verboseMode">
+                    <label for="verboseMode">Verbose Mode</label>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <h2>Output</h2>
+                <div id="detectedInfo" class="detected-info"></div>
+                <textarea id="outputText" readonly placeholder="Sanitized text will appear here..."></textarea>
+                <button id="copyBtn">Copy to Clipboard</button>
+            </div>
+        </div>
+        
+        <footer class="main-footer">
+            <p>&copy; 2025 SaniText</p>
+            <p>
+                <a href="https://github.com/MohamedElashri/sanitext" target="_blank">GitHub Repository</a>
+            </p>
+        </footer>
+        
+        <div id="interactivePrompt" class="interactive-prompt">
+            <div class="prompt-content">
+                <div class="prompt-header">
+                    <h3>Character Decision</h3>
+                    <button id="closePromptBtn" class="close-btn">&times;</button>
+                </div>
+                <p id="charInfo"></p>
+                <div class="decision-buttons">
+                    <button id="keepBtn">Keep</button>
+                    <button id="removeBtn">Remove</button>
+                    <button id="replaceBtn">Replace</button>
+                </div>
+                <div id="replacementInput" class="replacement-input">
+                    <input type="text" id="replacementChar" placeholder="Enter replacement character(s)">
+                    <button id="confirmReplaceBtn">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="homoglyph_map.js"></script>
+    <script src="emoji_set.js"></script>
+    <script src="sanitext.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
