@@ -42,6 +42,11 @@ body {
     animation: octocat-wave 560ms ease-in-out;
 }
 
+.github-corner {
+    z-index: 1001;
+    position: relative;
+}
+
 @keyframes octocat-wave {
     0%, 100% { transform: rotate(0); }
     20%, 60% { transform: rotate(-25deg); }
