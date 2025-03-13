@@ -17,15 +17,17 @@
     padding: 0;
 }
 
+/* Base responsive adjustments */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
-    padding: 20px;
+    padding: 20px 10px; /* Reduced side padding for mobile */
 }
 
 .container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     background-color: white;
@@ -55,16 +57,22 @@ body {
     }
 }
 
+/* Responsive header adjustments */
 .main-header {
     background-color: var(--primary-color);
     color: white;
-    padding: 20px;
+    padding: 20px 15px; /* Adjusted padding */
     text-align: center;
-    position: relative; /* Added for absolute positioning of the badge */
+    position: relative;
 }
 
 .main-header h1 {
     margin-bottom: 5px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
+}
+
+.main-header p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem); /* Responsive font size */
 }
 
 .main-header nav {
@@ -76,6 +84,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .main-header nav a {
@@ -95,11 +104,12 @@ body {
     font-weight: bold;
 }
 
+/* Responsive main content */
 .main-content {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
-    padding: 20px;
+    padding: 20px 15px; /* Adjusted padding */
 }
 
 @media (min-width: 768px) {
@@ -112,11 +122,23 @@ body {
     }
 }
 
+@media (max-width: 767px) {
+    .button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .button-group button {
+        margin-bottom: 8px;
+    }
+}
+
 h2 {
     margin-bottom: 15px;
     color: var(--secondary-color);
 }
 
+/* Responsive form elements */
 textarea {
     width: 100%;
     min-height: 150px;
@@ -126,6 +148,7 @@ textarea {
     resize: vertical;
     font-family: inherit;
     margin-bottom: 10px;
+    font-size: 16px; /* Better for mobile input */
 }
 
 button {
@@ -136,7 +159,8 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-size: 14px;
+    font-size: 16px; /* Better for mobile touch targets */
+    min-height: 44px; /* Minimum touch target size */
 }
 
 button:hover {
@@ -203,12 +227,29 @@ button:hover {
     display: flex;
 }
 
+/* Responsive interactive prompt */
 .prompt-content {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    width: 90%;
+    width: 95%;
     max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+    .prompt-content {
+        padding: 15px;
+    }
+    
+    .decision-buttons {
+        flex-direction: column;
+    }
+    
+    .decision-buttons button {
+        margin-bottom: 8px;
+    }
 }
 
 .prompt-header {
@@ -333,7 +374,29 @@ button:hover {
 
 /* About page content */
 .about-content {
-    padding: 20px;
+    padding: 20px 15px;
+}
+
+.explanation-box {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+    .explanation-box {
+        padding: 15px 12px;
+    }
+    
+    .explanation-section dt {
+        margin-top: 15px;
+    }
+    
+    .explanation-section dd {
+        margin-left: 10px;
+    }
 }
 
 /* Footer styles */
