@@ -1,3 +1,5 @@
+[![pages-build-deployment](https://github.com/MohamedElashri/sanitext/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/MohamedElashri/sanitext/actions/workflows/pages/pages-build-deployment)
+
 # SaniText
 
 A browser-based text sanitization tool for detecting and removing potentially problematic characters from text. SaniText helps ensure your text only contains characters you want to allow. It's particularly useful for:
