@@ -38,6 +38,13 @@ body {
 
 /* Header with navigation */
 /* GitHub Corner */
+.github-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+}
+
 .github-corner:hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
 }
