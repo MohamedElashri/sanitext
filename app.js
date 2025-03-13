@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const allowedCharacters = getAllowedCharacters({
             allowEmoji: allowEmoji.checked
-            // allowChars element no longer exists
         });
         
         const detected = detectSuspiciousCharacters(text, allowedCharacters);
@@ -86,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const allowedCharacters = getAllowedCharacters({
             allowEmoji: allowEmoji.checked
-            // allowChars element no longer exists
         });
         
         if (verboseMode.checked) {
@@ -140,11 +138,42 @@ document.addEventListener('DOMContentLoaded', () => {
         if (detected.length === 0) {
             detectedInfo.innerHTML = '<p>No suspicious characters detected.</p>';
         } else {
-            let html = '<h3>Detected Suspicious Characters:</h3><ul>';
-            detected.forEach(item => {
-                html += `<li><span class="suspicious-char">${item.char}</span> - ${item.hexCode} (${item.name})</li>`;
-            });
-            html += '</ul>';
+            let html = '<h3>Detected Suspicious Characters:</h3>';
+            if (verboseMode.checked) {
+                // Create a map to store unique characters and their count
+                const uniqueChars = new Map();
+                detected.forEach(item => {
+                    if (!uniqueChars.has(item.char)) {
+                        uniqueChars.set(item.char, { ...item, count: 1 });
+                    } else {
+                        uniqueChars.get(item.char).count++;
+                    }
+                });
+
+                html += '<div class="verbose-info">';
+                html += `<p>Total suspicious characters found: ${detected.length}</p>`;
+                html += '<ul>';
+                uniqueChars.forEach(item => {
+                    html += `<li>
+                        <div class="char-details">
+                            <span class="suspicious-char">${item.char}</span>
+                            <span class="char-info">Unicode: ${item.hexCode}</span>
+                            <span class="char-info">Code Point: ${item.codePoint}</span>
+                            <span class="char-info">Name: ${item.name}</span>
+                            <span class="char-info">Occurrences: ${item.count}</span>
+                            ${item.name.toLowerCase().includes('emoji') ? `<span class="char-info emoji-display">Emoji: ${item.char}</span>` : ''}
+                        </div>
+                    </li>`;
+                });
+                html += '</ul></div>';
+            } else {
+                const uniqueChars = [...new Set(detected.map(item => item))];
+                html += '<ul>';
+                uniqueChars.forEach(item => {
+                    html += `<li><span class="suspicious-char">${item.char}</span> - ${item.hexCode} (${item.name})</li>`;
+                });
+                html += '</ul>';
+            }
             detectedInfo.innerHTML = html;
         }
         detectedInfo.classList.add('show');
