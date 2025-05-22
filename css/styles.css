@@ -1,14 +1,33 @@
 :root {
-    --primary-color: #4a6fa5;
-    --secondary-color: #166088;
-    --accent-color: #4fc3f7;
-    --background-color: #f5f7fa;
-    --text-color: #333;
-    --light-gray: #e0e0e0;
-    --dark-gray: #757575;
-    --success-color: #66bb6a;
-    --warning-color: #ffa726;
-    --error-color: #ef5350;
+    /* Modernized Color Palette - Example: Cool Blues and Grays */
+    --primary-color: #007bff; /* Brighter, more standard blue */
+    --primary-hover-color: #0056b3;
+    --secondary-color: #5a6268; /* Darker gray for secondary text or elements */
+    --accent-color: #17a2b8; /* Teal accent */
+    --background-color: #f8f9fa; /* Lighter off-white */
+    --surface-color: #ffffff; /* For cards, modals */
+    --text-color: #212529; /* Darker gray for body text */
+    --text-muted-color: #6c757d; /* Lighter gray for less important text */
+    --border-color: #dee2e6; /* Light gray for borders */
+    --light-gray: #e9ecef; /* Retained for consistency if used elsewhere, but prefer --border-color */
+    
+    --success-color: #28a745;
+    --warning-color: #ffc107; /* Brighter yellow */
+    --error-color: #dc3545;
+
+    /* Typography */
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-size-base: 1rem; /* Typically 16px */
+    --line-height-base: 1.6;
+
+    /* Spacing */
+    --spacing-unit: 0.5rem; /* 8px if base is 16px */
+    --container-padding: calc(var(--spacing-unit) * 3); /* 24px */
+
+    /* Borders and Shadows */
+    --border-radius-base: 0.375rem; /* 6px */
+    --box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --box-shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -17,438 +36,490 @@
     padding: 0;
 }
 
-/* Base responsive adjustments */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
+    font-family: var(--font-family-sans-serif);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     color: var(--text-color);
     background-color: var(--background-color);
-    padding: 20px 10px; /* Reduced side padding for mobile */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 75rem; /* 1200px */
     margin: 0 auto;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    padding: var(--container-padding);
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius-base);
+    box-shadow: var(--box-shadow-md);
+    overflow: hidden; /* Contains child margins/paddings */
 }
 
-/* Header with navigation */
-/* GitHub Corner */
+/* GitHub Corner - Assuming it's still used in partials */
 .github-corner {
-    position: absolute;
+    position: absolute; /* This will be relative to the header if header is position:relative */
     top: 0;
     right: 0;
     z-index: 1001;
 }
+.github-corner svg { fill: var(--secondary-color); color: var(--surface-color); }
+.github-corner:hover .octo-arm { animation: octocat-wave 560ms ease-in-out; }
+@keyframes octocat-wave { 0%, 100% { transform: rotate(0); } 20%, 60% { transform: rotate(-25deg); } 40%, 80% { transform: rotate(10deg); } }
+@media (max-width: 500px) { .github-corner:hover .octo-arm { animation: none; } .github-corner .octo-arm { animation: octocat-wave 560ms ease-in-out; } }
 
-.github-corner:hover .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-}
-
-@keyframes octocat-wave {
-    0%, 100% { transform: rotate(0); }
-    20%, 60% { transform: rotate(-25deg); }
-    40%, 80% { transform: rotate(10deg); }
-}
-
-@media (max-width: 500px) {
-    .github-corner:hover .octo-arm {
-        animation: none;
-    }
-    .github-corner .octo-arm {
-        animation: octocat-wave 560ms ease-in-out;
-    }
-}
-
-/* Responsive header adjustments */
+/* Header */
 .main-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 20px 15px; /* Adjusted padding */
+    background-color: var(--primary-color); /* Using new primary color */
+    color: var(--surface-color);
+    padding: calc(var(--spacing-unit) * 3) var(--container-padding); /* 24px */
     text-align: center;
-    position: relative;
+    margin: calc(-1 * var(--container-padding)) calc(-1 * var(--container-padding)) var(--container-padding); /* Extend to container edges */
+    border-bottom: 1px solid var(--border-color);
+    position: relative; /* For GitHub corner positioning */
 }
 
 .main-header h1 {
-    margin-bottom: 5px;
-    font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
+    margin-bottom: var(--spacing-unit); /* 8px */
+    font-size: clamp(1.75rem, 4vw, 2.25rem); /* Responsive font size */
+}
+.main-header h1 a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .main-header p {
-    font-size: clamp(0.9rem, 2vw, 1.1rem); /* Responsive font size */
-}
-
-.main-header nav {
-    margin-top: 15px;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
 }
 
 .main-header nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: var(--spacing-unit); /* 8px gap */
+    flex-wrap: wrap;
 }
 
 .main-header nav a {
-    color: white;
+    color: var(--surface-color);
     text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2); /* 12px 16px */
+    border-radius: var(--border-radius-base);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    font-weight: 500;
+    display: inline-block; /* Ensures padding is respected */
 }
 
 .main-header nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .main-header nav a.active {
-    background-color: rgba(255, 255, 255, 0.3);
-    font-weight: bold;
+    background-color: var(--surface-color);
+    color: var(--primary-color);
+    font-weight: 600;
 }
 
-/* Responsive main content */
+/* Main Content */
 .main-content {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 20px 15px; /* Adjusted padding */
+    gap: calc(var(--spacing-unit) * 4); /* 32px */
+    padding: var(--spacing-unit) 0; /* Add some padding if container has none, or adjust based on overall design */
 }
 
 @media (min-width: 768px) {
     .main-content {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* More flexible grid */
     }
-    
+    .input-section, .options-section {
+        /* Example: allow them to span if needed or just adapt */
+    }
     .output-section {
-        grid-column: span 2;
-    }
-}
-
-@media (max-width: 767px) {
-    .button-group {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .button-group button {
-        margin-bottom: 8px;
+        grid-column: 1 / -1; /* Span full width */
     }
 }
 
 h2 {
-    margin-bottom: 15px;
-    color: var(--secondary-color);
+    font-size: 1.5rem; /* 24px */
+    margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+    color: var(--text-color); /* Changed from secondary to primary text for consistency */
+    font-weight: 600;
 }
 
-/* Responsive form elements */
-textarea {
+textarea,
+input[type="text"],
+input[type="file"] {
     width: 100%;
-    min-height: 150px;
-    padding: 12px;
-    border: 1px solid var(--light-gray);
-    border-radius: 4px;
-    resize: vertical;
+    padding: calc(var(--spacing-unit) * 1.5); /* 12px */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-base);
     font-family: inherit;
-    margin-bottom: 10px;
-    font-size: 16px; /* Better for mobile input */
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-button {
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="file"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-color), 0.25); /* Focus ring */
+}
+
+/* Buttons */
+button, .button { /* Added .button class for link-styled-as-button */
     background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
+    color: var(--surface-color);
+    border: 1px solid var(--primary-color);
+    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3); /* 12px 24px */
+    border-radius: var(--border-radius-base);
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 16px; /* Better for mobile touch targets */
-    min-height: 44px; /* Minimum touch target size */
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    min-height: 44px; /* For touch targets */
+    display: inline-block; /* For consistent styling */
+    text-decoration: none; /* For .button class */
 }
 
-button:hover {
+button:hover, .button:hover {
+    background-color: var(--primary-hover-color);
+    border-color: var(--primary-hover-color);
+    color: var(--surface-color);
+}
+
+button:focus-visible, .button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-color), 0.35);
+}
+
+/* Secondary button style */
+button.secondary, .button.secondary {
     background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--surface-color);
+}
+button.secondary:hover, .button.secondary:hover {
+    background-color: #495057; /* Darken(var(--secondary-color), 10%) */
+    border-color: #495057;
 }
 
 .button-group {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: calc(var(--spacing-unit) * 2); /* 16px */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
 }
 
+@media (max-width: 767px) {
+    .button-group {
+        flex-direction: column; /* Stack buttons on mobile */
+        align-items: stretch; /* Make buttons full width */
+    }
+    .button-group button, .button-group .button {
+        width: 100%; /* Ensure buttons take full width */
+        margin-bottom: var(--spacing-unit); /* Add space between stacked buttons */
+    }
+    .button-group button:last-child, .button-group .button:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Options Section */
 .options-section {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 4px;
+    background-color: var(--background-color); /* Slightly different from main bg for definition */
+    padding: calc(var(--spacing-unit) * 3); /* 24px */
+    border-radius: var(--border-radius-base);
+    border: 1px solid var(--border-color);
 }
 
 .option {
-    margin-bottom: 15px;
+    margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+}
+.option:last-child {
+    margin-bottom: 0;
 }
 
 .option label {
-    display: inline-block;
-    margin-bottom: 5px;
+    display: block; /* Make label take full width for better spacing */
+    margin-bottom: var(--spacing-unit); /* 8px */
+    font-weight: 500;
+    color: var(--text-color);
+}
+.option input[type="checkbox"] {
+    margin-right: var(--spacing-unit); /* 8px */
+    accent-color: var(--primary-color); /* Modern way to style checkbox color */
+    width: 1.15em;
+    height: 1.15em;
+    vertical-align: middle;
+}
+.option input[type="file"] {
+    font-size: 0.9rem; /* Slightly smaller for file input */
+    padding: var(--spacing-unit);
 }
 
-.option input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid var(--light-gray);
-    border-radius: 4px;
-}
 
+/* Detected Info */
 .detected-info {
-    background-color: #f0f7ff;
+    background-color: #e6f7ff; /* Lighter accent background */
     border-left: 4px solid var(--accent-color);
-    padding: 10px;
-    margin-bottom: 15px;
-    max-height: 150px;
+    padding: calc(var(--spacing-unit) * 2); /* 16px */
+    margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+    max-height: 200px; /* Increased max-height */
     overflow-y: auto;
-    display: none;
+    display: none; /* Hidden by default */
+    border-radius: 0 var(--border-radius-base) var(--border-radius-base) 0;
+    font-size: 0.9rem;
 }
+.detected-info.show { display: block; }
 
-.detected-info.show {
-    display: block;
-}
-
+/* Interactive Prompt (Modal) */
 .interactive-prompt {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
+    display: none; /* Hidden by default, shown with .show */
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-    display: none;
+    z-index: 1050; /* Higher z-index */
+    padding: var(--spacing-unit); /* Padding for small screens, so modal doesn't touch edges */
 }
+.interactive-prompt.show { display: flex; }
 
-.interactive-prompt.show {
-    display: flex;
-}
-
-/* Responsive interactive prompt */
 .prompt-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 95%;
-    max-width: 500px;
+    background-color: var(--surface-color);
+    padding: calc(var(--spacing-unit) * 4); /* 32px */
+    border-radius: var(--border-radius-base);
+    box-shadow: var(--box-shadow-md);
+    width: 100%;
+    max-width: 35rem; /* Approx 560px */
     max-height: 90vh;
     overflow-y: auto;
-}
-
-@media (max-width: 480px) {
-    .prompt-content {
-        padding: 15px;
-    }
-    
-    .decision-buttons {
-        flex-direction: column;
-    }
-    
-    .decision-buttons button {
-        margin-bottom: 8px;
-    }
+    position: relative; /* For positioning elements like close button if needed */
 }
 
 .prompt-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+    padding-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+    border-bottom: 1px solid var(--border-color);
+}
+.prompt-header h3 {
+    font-size: 1.25rem; /* 20px */
+    color: var(--text-color);
+    font-weight: 600;
 }
 
 .close-btn {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 1.75rem; /* Larger for easier clicking */
     cursor: pointer;
-    color: var(--dark-gray);
-    padding: 0 5px;
+    color: var(--text-muted-color);
+    padding: 0; /* Reset padding */
     line-height: 1;
+    transition: color 0.2s ease;
 }
-
 .close-btn:hover {
     color: var(--error-color);
-    background: none;
+}
+
+#charInfo {
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    font-size: 1.1rem;
+    word-break: break-all; /* In case charInfo is long */
 }
 
 .decision-buttons {
     display: flex;
-    gap: 10px;
-    margin-top: 15px;
+    gap: calc(var(--spacing-unit) * 2); /* 16px */
+    flex-wrap: wrap; /* Allow buttons to wrap */
+}
+.decision-buttons button { flex: 1 1 auto; } /* Allow buttons to grow and shrink */
+
+@media (max-width: 480px) {
+    .prompt-content { padding: calc(var(--spacing-unit) * 3); } /* 24px */
+    .decision-buttons { flex-direction: column; }
+    .decision-buttons button { width: 100%; } /* Make buttons full width */
 }
 
 .replacement-input {
-    margin-top: 15px;
-    display: none;
+    margin-top: calc(var(--spacing-unit) * 3); /* 24px */
+    display: none; /* Hidden by default */
+    gap: calc(var(--spacing-unit) * 2); /* 16px */
 }
-
-.replacement-input.show {
-    display: flex;
-    gap: 10px;
-}
-
-.replacement-input input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid var(--light-gray);
-    border-radius: 4px;
-}
+.replacement-input.show { display: flex; }
+.replacement-input input[type="text"] { flex-grow: 1; }
 
 /* Character highlighting */
 .suspicious-char {
-    background-color: rgba(255, 167, 38, 0.2);
+    background-color: rgba(var(--warning-color), 0.15); /* Use RGB for alpha */
     border-bottom: 2px solid var(--warning-color);
-    padding: 0 2px;
-    border-radius: 2px;
+    padding: 0 0.125rem; /* 2px */
+    border-radius: 0.125rem; /* 2px */
 }
 
 /* Toast notifications */
 .toast {
     position: fixed;
-    bottom: 20px;
+    bottom: calc(var(--spacing-unit) * 4); /* 32px */
     left: 50%;
     transform: translateX(-50%);
-    padding: 12px 24px;
-    border-radius: 4px;
-    color: white;
+    padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4); /* 16px 32px */
+    border-radius: var(--border-radius-base);
+    color: var(--surface-color);
     font-weight: 500;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Added transform transition */
+    z-index: 1060; /* Ensure it's above modals */
+    box-shadow: var(--box-shadow-md);
 }
-
 .toast.show {
     opacity: 1;
+    transform: translateX(-50%) translateY(0); /* End position */
 }
+.toast.info { background-color: var(--accent-color); }
+.toast.success { background-color: var(--success-color); }
+.toast.error { background-color: var(--error-color); }
 
-.toast.success {
-    background-color: var(--success-color);
-}
 
-.toast.error {
-    background-color: var(--error-color);
-}
-
-.toast.info {
-    background-color: var(--accent-color);
-}
-
-.toast.show {
-    opacity: 1;
-}
-
-/* Explanation section */
-.explanation-section {
-    padding: 20px;
-    margin-top: 20px;
+/* Content Pages (About, Privacy) */
+.about-content, .privacy-content { /* Assuming privacy page might use a similar class */
+    padding: var(--spacing-unit) 0; /* Consistent with main-content */
 }
 
 .explanation-box {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: var(--surface-color); /* Use surface for consistency */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-base);
+    padding: calc(var(--spacing-unit) * 3); /* 24px */
+    margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+    box-shadow: var(--box-shadow-sm); /* Subtle shadow */
 }
 
-.explanation-section h3 {
-    color: var(--secondary-color);
-    margin: 15px 0 10px;
-}
-
-.explanation-section p {
-    margin-bottom: 15px;
-}
-
-.explanation-section dl {
-    margin-bottom: 15px;
-}
-
-.explanation-section dt {
-    font-weight: bold;
-    margin-top: 10px;
+.explanation-box h3 {
     color: var(--primary-color);
+    margin-top: 0; /* Remove top margin if it's the first child */
+    margin-bottom: var(--spacing-unit); /* 8px */
+    font-size: 1.2rem; /* 19.2px */
+}
+.explanation-box p,
+.explanation-box ul,
+.explanation-box ol,
+.explanation-box dl {
+    margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+    line-height: var(--line-height-base);
+}
+.explanation-box ul, 
+.explanation-box ol {
+    padding-left: calc(var(--spacing-unit) * 4); /* 32px, default is often 40px */
+}
+.explanation-box li {
+    margin-bottom: var(--spacing-unit); /* 8px */
+}
+.explanation-box dt {
+    font-weight: 600; /* Bolder */
+    color: var(--text-color);
+    margin-top: calc(var(--spacing-unit) * 2); /* 16px */
+}
+.explanation-box dd {
+    margin-left: calc(var(--spacing-unit) * 3); /* 24px */
+    margin-bottom: var(--spacing-unit); /* 8px */
+    color: var(--text-muted-color);
 }
 
-.explanation-section dd {
-    margin-left: 20px;
-    margin-bottom: 10px;
+.option-name { /* For highlighting feature names etc. */
+    background-color: var(--accent-color);
+    color: var(--surface-color);
+    padding: 0.125rem 0.5rem; /* 2px 8px */
+    border-radius: var(--border-radius-base);
+    font-weight: 500; /* Adjusted weight */
+    font-size: 0.875rem; /* 14px */
+    display: inline-block;
 }
 
-.explanation-section ul, 
-.explanation-section ol {
-    margin-left: 20px;
-    margin-bottom: 15px;
-}
-
-.explanation-section li {
-    margin-bottom: 5px;
-}
-
-/* About page content */
-.about-content {
-    padding: 20px 15px;
-}
-
-.explanation-box {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 480px) {
-    .explanation-box {
-        padding: 15px 12px;
-    }
-    
-    .explanation-section dt {
-        margin-top: 15px;
-    }
-    
-    .explanation-section dd {
-        margin-left: 10px;
-    }
-}
-
-/* Footer styles */
+/* Footer */
 .main-footer {
-    background-color: #f5f5f5;
-    padding: 15px 20px;
+    background-color: var(--background-color); /* Match body background or slightly darker */
+    padding: calc(var(--spacing-unit) * 3) var(--container-padding); /* 24px */
     text-align: center;
-    margin-top: 30px;
-    border-top: 1px solid var(--light-gray);
+    margin: var(--container-padding) calc(-1 * var(--container-padding)) calc(-1 * var(--container-padding)); /* Extend to container edges */
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem; /* 14.4px */
+    color: var(--text-muted-color);
 }
 
 .main-footer p {
-    margin: 5px 0;
+    margin-bottom: var(--spacing-unit); /* 8px */
+}
+.main-footer p:last-child {
+    margin-bottom: 0;
 }
 
 .main-footer a {
     color: var(--primary-color);
     text-decoration: none;
+    font-weight: 500;
 }
-
 .main-footer a:hover {
     text-decoration: underline;
+    color: var(--primary-hover-color);
 }
-/* Option name highlighting */
-.option-name {
-    background-color: var(--accent-color);
-    color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: normal;
-    display: inline-block;
+
+/* Responsive Adjustments for Layout */
+@media (max-width: 767px) {
+    body {
+        /* No specific body padding, container handles it */
+    }
+    .container {
+        padding: calc(var(--spacing-unit) * 2); /* 16px padding for smaller screens */
+    }
+    .main-header, .main-footer {
+        margin-left: calc(-1 * var(--spacing-unit) * 2);
+        margin-right: calc(-1 * var(--spacing-unit) * 2);
+        padding-left: calc(var(--spacing-unit) * 2);
+        padding-right: calc(var(--spacing-unit) * 2);
+    }
+    .main-header { margin-bottom: calc(var(--spacing-unit) * 2); }
+
+    h2 { font-size: 1.3rem; } /* Slightly smaller h2 on mobile */
+
+    .explanation-box { padding: calc(var(--spacing-unit) * 2.5); } /* 20px */
+}
+
+@media (max-width: 480px) {
+    .main-header nav ul { gap: calc(var(--spacing-unit) * 0.5); } /* Smaller gap for nav links */
+    .main-header nav a { padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5); } /* 8px 12px */
+
+    .options-section { padding: calc(var(--spacing-unit) * 2.5); } /* 20px */
+}
+
+/* Utility classes (optional, use sparingly) */
+.sr-only { /* For screen readers only */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
