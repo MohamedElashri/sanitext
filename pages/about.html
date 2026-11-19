@@ -23,109 +23,66 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <a href="https://github.com/MohamedElashri/sanitext" target="_blank" class="github-corner" aria-label="View source on GitHub">
-        <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0; z-index: 1001;" aria-hidden="true">
-            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-            <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-            <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
-        </svg>
-    </a>
-    <div class="container">
-        <header class="main-header">
-
-            <h1><a href="index.html" style="text-decoration: none; color: inherit;">SaniText</a></h1>
-            <p>A browser-based text sanitization tool</p>
-            <nav>
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                </ul>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <div class="site-width header-inner">
+            <a class="brand" href="../index.html">SaniText</a>
+            <nav class="site-nav" aria-label="Main">
+                <a href="about.html" aria-current="page">About</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="https://github.com/MohamedElashri/sanitext" target="_blank" rel="noopener noreferrer">GitHub</a>
             </nav>
-        </header>
-        
-        <div class="about-content">
-            <h2>How SaniText Works</h2>
-            <p>SaniText is a tool for detecting and removing potentially problematic characters from text. It helps ensure your text only contains characters you want to allow.</p>
-            
-            <div class="explanation-box">
-                <h3>Features</h3>
-                <dl>
-                    <dt><span class="option-name">Detect Only</span></dt>
-                    <dd>Identifies suspicious characters in your text without modifying it. This is useful for checking what characters might be problematic before sanitizing.</dd>
-                    
-                    <dt><span class="option-name">Sanitize Text</span></dt>
-                    <dd>Processes your text by removing or replacing characters that aren't in the allowed set. By default, only ASCII printable characters are allowed.</dd>
-                    
-                    <dt><span class="option-name">Paste from Clipboard</span></dt>
-                    <dd>Quickly inserts text from your clipboard into the input area.</dd>
-                    
-                    <dt><span class="option-name">Copy to Clipboard</span></dt>
-                    <dd>Copies the sanitized output text to your clipboard for easy use elsewhere.</dd>
-                </dl>
-                
-                <h3>Options</h3>
-                <dl>
-                    <dt><span class="option-name">Allow Emoji</span></dt>
-                    <dd>When checked, common single code point emoji characters (like 😀, 👍, ❤️) will be preserved during sanitization instead of being removed.</dd>
-                    
-                    <dt><span class="option-name">Additional allowed characters</span></dt>
-                    <dd>Specify specific characters you want to allow, even if they're not ASCII printable. For example, entering "αñøç" will allow these specific Greek and special Latin characters to remain in your text.</dd>
-                    
-                    <dt><span class="option-name">Load allowed characters from file</span></dt>
-                    <dd>Upload a text file containing characters you want to allow. Every character in the file will be added to the allowed set. This is useful for handling large sets of special characters.</dd>
-                    
-                    <dt><span class="option-name">Interactive Mode</span></dt>
-                    <dd>When enabled, SaniText will prompt you for each unique disallowed character, giving you the option to keep it, remove it, or replace it with something else. This gives you fine-grained control over the sanitization process.</dd>
-                    
-                    <dt><span class="option-name">Verbose Mode</span></dt>
-                    <dd>Shows detailed information about detected suspicious characters, including their Unicode code points and names. This helps you understand what characters were found and how they were handled.</dd>
-                </dl>
-            </div>
-            
-            <div class="explanation-box">
-                <h3>How Sanitization Works</h3>
-                <p>SaniText follows these steps when sanitizing text:</p>
-                <ol>
-                    <li>Determines the set of allowed characters based on your options</li>
-                    <li>Identifies all characters in your text that aren't in the allowed set</li>
-                    <li>For each disallowed character:
-                        <ul>
-                            <li>In interactive mode: Asks you what to do with it</li>
-                            <li>In automatic mode: Tries to replace it with a similar ASCII character if possible, otherwise removes it</li>
-                        </ul>
-                    </li>
-                    <li>Constructs the sanitized text using your decisions or automatic replacements</li>
-                </ol>
-                
-                <h3>Character Replacement</h3>
-                <p>When replacing characters, SaniText uses several strategies:</p>
-                <ul>
-                    <li><strong>Homoglyph mapping:</strong> Characters that look similar to ASCII (like "Α" → "A") are replaced with their ASCII lookalikes</li>
-                    <li><strong>Unicode normalization:</strong> Composed characters are decomposed into their base form when possible</li>
-                    <li><strong>Removal:</strong> Characters with no good ASCII equivalent are removed</li>
-                </ul>
-            </div>
-            
-            <div class="explanation-box">
-                <h3>Use Cases</h3>
-                <ul>
-                    <li><strong>Security:</strong> Sanitize user input to prevent homoglyph attacks or injection of invisible/special characters</li>
-                    <li><strong>Data Cleaning:</strong> Prepare text data for systems that only support ASCII</li>
-                    <li><strong>Compatibility:</strong> Ensure text works in environments with limited character support</li>
-                    <li><strong>Standardization:</strong> Convert text with various Unicode characters to a standardized form</li>
-                </ul>
-            </div>
         </div>
-        
-        <footer class="main-footer">
-            <p>&copy; 2025 SaniText</p>
-        </footer>
-    </div>
+    </header>
+
+    <main class="site-width info-page" id="main">
+        <h1>About SaniText</h1>
+        <p>Inspect Unicode text and clean up lookalike, invisible, or unsupported characters in your browser.</p>
+
+        <section>
+            <h2>Using the tool</h2>
+            <dl>
+                <dt>Detect only</dt>
+                <dd>Inspect flagged characters and their Unicode code points while keeping your text as it is.</dd>
+                <dt>Sanitize text</dt>
+                <dd>Clean up characters outside the allowed set. SaniText keeps printable ASCII, tabs, and line breaks by default.</dd>
+                <dt>Paste, open, and copy</dt>
+                <dd>Paste from the clipboard or open a local file. When the output is ready, copy it back to your clipboard.</dd>
+            </dl>
+        </section>
+
+        <section>
+            <h2>Settings</h2>
+            <dl>
+                <dt>Allow emoji</dt>
+                <dd>Keep common single-code-point emoji during sanitization.</dd>
+                <dt>Interactive mode</dt>
+                <dd>Choose whether to keep, remove, or replace each unique flagged character.</dd>
+                <dt>Verbose mode</dt>
+                <dd>Show detection results when sanitizing and include occurrence counts and decimal code points.</dd>
+            </dl>
+        </section>
+
+        <section>
+            <h2>How cleanup works</h2>
+            <p>SaniText checks each character against the allowed set. In automatic mode, it processes flagged characters in this order.</p>
+            <ol>
+                <li>Look for a visually similar ASCII character, such as replacing Cyrillic Н with Latin H.</li>
+                <li>Try Unicode compatibility normalization and keep the result if it uses allowed characters.</li>
+                <li>Remove the character if no allowed replacement was found.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>When to use SaniText</h2>
+            <ul>
+                <li>Inspect text for lookalike letters and invisible characters.</li>
+                <li>Prepare data for systems that accept only ASCII.</li>
+                <li>Check text before sending it to software with limited character support.</li>
+                <li>Standardize text that uses several Unicode forms for similar characters.</li>
+            </ul>
+        </section>
+    </main>
+
 </body>
 </html>
-
-    <script src="../js/homoglyph_map.js"></script>
-    <script src="../js/emoji_set.js"></script>
-    <script src="../js/sanitext.js"></script>
-    <script src="../js/app.js"></script>
