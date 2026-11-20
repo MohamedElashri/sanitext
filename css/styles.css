@@ -12,6 +12,9 @@
 [hidden] { display: none !important; }
 
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     margin: 0;
     background: #fff;
     color: var(--ink);
@@ -79,6 +82,17 @@ a { color: inherit; }
 }
 
 .site-nav a:hover, .site-nav a[aria-current] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+.site-footer {
+    margin-top: auto;
+    padding-block: 14px 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.site-footer a { text-underline-offset: 3px; }
+.site-footer a:hover { color: var(--accent); }
 
 .workspace, .info-page { padding-block: 40px 48px; }
 .workspace-heading { gap: 12px; margin-bottom: 14px; }
